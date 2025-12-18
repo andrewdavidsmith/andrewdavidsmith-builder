@@ -19,3 +19,9 @@ jobs:
           file: ./ubuntu_1604/Dockerfile
           push: true
           tags: andrewdavidsmith/ubuntu-1604:latest
+          # Enable SBOM + provenance attestations
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+          # Provenance (SLSA) + SBOM
+          provenance: true
+          sbom: true
