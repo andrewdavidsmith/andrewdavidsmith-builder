@@ -2,6 +2,7 @@ name: Build and push the ubuntu 16.04 base
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
   ubuntu-1604:
