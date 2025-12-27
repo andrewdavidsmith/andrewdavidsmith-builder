@@ -34,7 +34,6 @@ jobs:
           # Enable SBOM + provenance attestations
           build-args: |
             BUILDKIT_INLINE_CACHE=1
-            NUM_JOBS=1
           # Provenance (SLSA) + SBOM
           provenance: true
           sbom: true
