@@ -61,7 +61,8 @@ jobs:
           echo '${{ toJson(inputs) }}'
 
           echo '=== outputs ==='
-          echo '${{ toJson(outputs) }}'
+          echo '${{ toJson(output) }}'
+
         # uses: actions/attest-sbom@v2
         # with:
         #   subject-name: ${{ env.REGISTRY }}/andrewdavidsmith/ubuntu-1604
