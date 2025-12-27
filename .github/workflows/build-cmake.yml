@@ -1,0 +1,39 @@
+name: CMake on builder base
+run-name: Build and push the CMake layer on the builder base image
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  attestations: write
+  packages: write
+
+jobs:
+  builder-cmake:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dockerhub Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker Buildx Setup
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        id: build-and-push
+        uses: docker/build-push-action@v6
+        with:
+          context: "{{defaultContext}}:builder_cmake"
+          push: true
+          tags: andrewdavidsmith/builder-cmake:latest
+          # Enable SBOM + provenance attestations
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+          # Provenance (SLSA) + SBOM
+          provenance: true
+          sbom: true
