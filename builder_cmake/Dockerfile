@@ -15,7 +15,7 @@ RUN export LD_LIBRARY_PATH=/usr/local/lib64 && \
     wget -nv https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz && \
     tar -zxf cmake-${CMAKE_VERSION}.tar.gz && \
     cd cmake-${CMAKE_VERSION} && \
-    ./bootstrap --parallel=${NUM_JOBS} --prefix=/usr/local && \
+    ./bootstrap --parallel=${NUM_JOBS} --no-debugger --prefix=/usr/local && \
     make -j${NUM_JOBS} && \
     make install
 
