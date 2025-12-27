@@ -2,7 +2,7 @@
 
 ARG CMAKE_VERSION=4.1.2
 # Cores to use when building
-ARG NUM_JOBS=4
+ARG NUM_JOBS=1
 
 FROM andrewdavidsmith/ubuntu-1604:latest AS builder-cmake-tmp
 
