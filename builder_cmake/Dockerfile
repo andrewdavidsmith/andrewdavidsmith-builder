@@ -12,10 +12,14 @@ FROM andrewdavidsmith/ubuntu-1604:latest AS builder-cmake-tmp
 ARG CMAKE_VERSION
 WORKDIR /tmp/cmake
 RUN export LD_LIBRARY_PATH=/usr/local/lib64 && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    liblzma-dev \
+    libcurl4-openssl-dev && \
     wget -nv https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz && \
     tar -zxf cmake-${CMAKE_VERSION}.tar.gz && \
     cd cmake-${CMAKE_VERSION} && \
-    ./bootstrap --parallel=${NUM_JOBS} --no-debugger --prefix=/usr/local && \
+    ./bootstrap --parallel=${NUM_JOBS} --system-curl --system-bzip2 --system-liblzma --no-debugger --no-qt-gui --prefix=/usr/local && \
     make -j${NUM_JOBS} && \
     make install
 
